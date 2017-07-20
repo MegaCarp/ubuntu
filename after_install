@@ -1,0 +1,31 @@
+#https://www.youtube.com/watch?v=RXV6FXVL6xI
+
+#1.Configure Update Manager
+#2.Install Drivers
+#3.Install Microcode
+#4.Decrease Swap Use
+
+#swap
+#check thru
+#cat /proc/sys/vm/swappiness
+#’60’=mucho swappiness
+echo ‘vm.swappiness=10’ | sudo tee -a /etc/sysctl.conf
+
+#5.Enable Drive Cache
+#Disks -> [your driver] -> Drive settings -> Write cache - On
+
+#6.Reduce SSD Writes
+sudo nano /etc/fstab
+#for every partition in ssd except swap add 'noatime,' before 'errors'
+
+#7.Turn on Firewall
+#8.Install Microsoft Fonts
+
+
+9.Remove Unnecessary Software.
+10.Change Firefox settings
+11.Tweak LibreOffice
+12.Remove Some Applets
+13.Turn Off Startup Applications
+14.Disable Hibernation (suspend-to-disk)
+15.Disable Switch User Option
