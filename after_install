@@ -20,9 +20,12 @@ sudo nano /etc/fstab
 
 #7.Turn on Firewall
 #8.Install Microsoft Fonts
+sudo apt-get install ttf-mscorefonts-installer
 
+#9.Remove Unnecessary Software
+sudo apt-get remove virtualbox-guest* tomboy simple-scan gimp hexchat pidgin thunderbird transmission
+sudo apt-get install xpad qbittorrent 
 
-9.Remove Unnecessary Software.
 10.Change Firefox settings
 11.Tweak LibreOffice
 12.Remove Some Applets
