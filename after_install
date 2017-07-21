@@ -24,11 +24,26 @@ sudo apt-get install ttf-mscorefonts-installer
 
 #9.Remove Unnecessary Software
 sudo apt-get remove virtualbox-guest* tomboy simple-scan gimp hexchat pidgin thunderbird transmission
-sudo apt-get install xpad qbittorrent 
+sudo apt-get install xpad qbittorrent dconf-editor
 
-10.Change Firefox settings
-11.Tweak LibreOffice
+#10.Change Firefox settings
+#search, start page
+
+#11.Tweak LibreOffice
+#Tools -> Options -> Advanced -> Disable Java
+#Tools -> Options -> Memory -> 64 for LibreOffice & 12 Memory per object
+
 12.Remove Some Applets
+#User applet
+
 13.Turn Off Startup Applications
+#mintUpload, mintwelcome
+#Nvidia app if you don't have Nvidia card
+
 14.Disable Hibernation (suspend-to-disk)
+sudo mv -v /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla /
+#to undo
+#sudo mv -v /com.ubuntu.enable-hibernate.pkla /etc/polkit-1/localauthority/50-local.d
+
 15.Disable Switch User Option
+#open dconf -> org -> cinnamon -> desktop -> lockdown -> disable user switching
