@@ -4,27 +4,19 @@
 #2.Install Drivers
 #3.Install Microcode
 #4.Decrease Swap Use
+#check thru cat /proc/sys/vm/swappiness - ’60’=mucho swappiness
 
-#swap
-#check thru
-#cat /proc/sys/vm/swappiness
-#’60’=mucho swappiness
 echo ‘vm.swappiness=10’ | sudo tee -a /etc/sysctl.conf
-
-#5.Enable Drive Cache
-#Disks -> [your driver] -> Drive settings -> Write cache - On
+sudo apt-get remove virtualbox-guest* tomboy simple-scan gimp hexchat pidgin thunderbird transmission
+sudo apt-get install xpad qbittorrent ttf-mscorefonts-installer dconf-editor
+sudo mv -v /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla /
 
 #6.Reduce SSD Writes
 sudo nano /etc/fstab
-#for every partition in ssd except swap add 'noatime,' before 'errors'
+#for every partition on ssd except swap add 'noatime,' before 'errors'
 
-#7.Turn on Firewall
-#8.Install Microsoft Fonts
-sudo apt-get install ttf-mscorefonts-installer
-
-#9.Remove Unnecessary Software
-sudo apt-get remove virtualbox-guest* tomboy simple-scan gimp hexchat pidgin thunderbird transmission
-sudo apt-get install xpad qbittorrent dconf-editor
+#5.Enable Drive Cache
+#Disks -> [your driver] -> Drive settings -> Write cache - On
 
 #10.Change Firefox settings
 #search, start page
@@ -33,17 +25,16 @@ sudo apt-get install xpad qbittorrent dconf-editor
 #Tools -> Options -> Advanced -> Disable Java
 #Tools -> Options -> Memory -> 64 for LibreOffice & 12 Memory per object
 
-12.Remove Some Applets
-#User applet
+#12.Remove Some Applets
+#remove User applet
 
-13.Turn Off Startup Applications
+#13.Turn Off Startup Applications
 #mintUpload, mintwelcome
 #Nvidia app if you don't have Nvidia card
 
-14.Disable Hibernation (suspend-to-disk)
-sudo mv -v /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla /
+#14.Disable Hibernation (suspend-to-disk)
 #to undo
 #sudo mv -v /com.ubuntu.enable-hibernate.pkla /etc/polkit-1/localauthority/50-local.d
 
-15.Disable Switch User Option
+#15.Disable Switch User Option
 #open dconf -> org -> cinnamon -> desktop -> lockdown -> disable user switching
