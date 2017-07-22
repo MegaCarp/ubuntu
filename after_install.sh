@@ -1,7 +1,7 @@
 #!/bin/sh
 # update & upgrade #
 sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get dist-upgrade
 
 # setup personal repo #
 sudo apt-get install dpkg-dev
@@ -14,27 +14,30 @@ sudo chmod u+x ~/bin/update-mydebs
 echo deb [trusted=yes] file://$HOME/.mydebs ./ | sudo tee -a /etc/apt/sources.list
 
 # add custom sources and PPA's #
-sudo sh -c "echo '## PPA ###' >> /etc/apt/sources.list"
-# ubuntuzilla
-sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C1289A29
-sudo sh -c "echo 'deb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main #Ubuntuzilla' >>/etc/apt/sources.list"
-# vlc
-sudo add-apt-repository ppa:c-korn/vlc
-# getdeb
-wget -q -O- http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
-sudo sh -c "echo 'deb http://archive.getdeb.net/ubuntu karmic-getdeb apps #getdeb' >> /etc/apt/sources.list"
-# medibuntu
-echo deb http://packages.medibuntu.org/ karmic free non-free | sudo tee -a /etc/apt/sources.list
-wget -q http://packages.medibuntu.org/medibuntu-key.gpg -O- | sudo apt-key add -
+# sudo sh -c "echo '## PPA ###' >> /etc/apt/sources.list" #
+#skype # make sure you have 'apt-transport-https' installed
+dpkg -s apt-transport-https > /dev/null || bash -c "sudo apt-get update; sudo apt-get install apt-transport-https -y"
+curl https://repo.skype.com/data/SKYPE-GPG-KEY | sudo apt-key add -
+echo "deb [arch=amd64] https://repo.skype.com/deb stable main" | sudo tee /etc/apt/sources.list.d/skype-stable.list 
+
+sudo add-apt-repository ppa:atareao/telegram -y 
+
+#chrome x64 only
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+
+#anydesk, check https://anydesk.com/download for proper link, here's default Debian x64
+wget -O ~/.mydebs/anydesk.deb https://download.anydesk.com/linux/anydesk_2.9.3-1_amd64.deb 
+
 # update & upgrade #
+update-mydebs
 sudo apt-get update
 sudo apt-get upgrade
 # REMOVE some unneeded apps #
-sudo apt-get remove gnome-games gnome-games-common empathy
+sudo apt-get remove virtualbox-guest* tomboy simple-scan gimp hexchat pidgin thunderbird transmission -y
 # INSTALL new apps #
-sudo apt-get install smbfs nautilus-open-terminal vim mc openvpn geany smplayer minitube firefox-mozilla-build thunderbird-mozilla-build ubuntu-restricted-extras
-# INSTALL deb files from directory #
-sudo dpkg -i /home/yourname/directory/with/deb/files/*.deb
+sudo apt-get install xpad qbittorrent anydesk telegram skypeforlinux intel-microcode ttf-mscorefonts-installer dconf-editor -y
+
 # make some directories needed by fstab #
 sudo mkdir /media/remotemachine
 sudo mkdir /media/ntfs
