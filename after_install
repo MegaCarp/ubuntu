@@ -7,10 +7,7 @@
 #check thru cat /proc/sys/vm/swappiness - ’60’=mucho swappiness
 
 sudo echo "vm.swappiness=10" >> /etc/sysctl.conf
-sudo apt-get remove virtualbox-guest* tomboy simple-scan gimp hexchat pidgin thunderbird transmission
-sudo apt-get install xpad qbittorrent ttf-mscorefonts-installer dconf-editor
-sudo mv -v /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla /
-sudo add-apt-repository ppa:atareao/telegram -y &&  sudo apt-get update &&  sudo apt-get install telegram 
+sudo mv -v /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla / 
 
 #check https://anydesk.com/download for proper link, here's default Debian x64
 wget -O ~/.mydebs/anydesk.deb https://download.anydesk.com/linux/anydesk_2.9.3-1_amd64.deb && sudo update-mydebs && sudo apt-get update && sudo apt-get install anydesk
