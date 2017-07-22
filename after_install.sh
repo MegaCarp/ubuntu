@@ -1,5 +1,6 @@
 #!/bin/sh
 # update & upgrade #
+#power options? suspend\hiber on lid closing and low power? #
 sudo apt-get update
 sudo apt-get dist-upgrade
 
@@ -37,6 +38,14 @@ sudo apt-get upgrade
 sudo apt-get remove virtualbox-guest* tomboy simple-scan gimp hexchat pidgin thunderbird transmission -y
 # INSTALL new apps #
 sudo apt-get install xpad qbittorrent anydesk telegram skypeforlinux intel-microcode ttf-mscorefonts-installer dconf-editor -y
+
+# dconf settings edit # # power options #
+gsettings set org.cinnamon.settings-daemon.plugins.power button-hibernate 'suspend'
+gsettings set org.cinnamon.settings-daemon.plugins.power button-power 'suspend'
+gsettings set org.cinnamon.settings-daemon.plugins.power critical-battery-action 'suspend'
+gsettings set org.cinnamon.settings-daemon.plugins.power lock-on-suspend 'false'
+gsettings set org.cinnamon.settings-daemon.plugins.power sleep-display-battery '300'
+gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-battery-timeout '300'
 
 # make some directories needed by fstab #
 sudo mkdir /media/remotemachine
