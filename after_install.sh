@@ -39,6 +39,15 @@ sudo apt-get remove virtualbox-guest* tomboy simple-scan gimp hexchat pidgin thu
 # INSTALL new apps #
 sudo apt-get install xpad qbittorrent anydesk telegram skypeforlinux intel-microcode ttf-mscorefonts-installer dconf-editor -y
 
+#applets
+cd ~/.local/share/cinnamon/applets/
+
+#'panel1:right:0:sticky@scollins:15'
+wget https://cinnamon-spices.linuxmint.com/files/applets/sticky@scollins.zip -O temp.zip; unzip temp.zip
+
+rm temp.zip
+cd ~
+
 # dconf settings edit # # power options #
 gsettings set org.cinnamon.settings-daemon.plugins.power button-hibernate 'suspend'
 gsettings set org.cinnamon.settings-daemon.plugins.power button-power 'suspend'
@@ -47,32 +56,15 @@ gsettings set org.cinnamon.settings-daemon.plugins.power lock-on-suspend 'false'
 gsettings set org.cinnamon.settings-daemon.plugins.power sleep-display-battery '300'
 gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-battery-timeout '300'
 
+gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org:1', 'panel1:left:2:panel-launchers@cinnamon.org:3', 'panel1:left:3:window-list@cinnamon.org:4', 'panel1:right:0:systray@cinnamon.org:0', 'panel1:right:0:on-screen-keyboard@cinnamon.org:14', 'panel1:right:1:keyboard@cinnamon.org:5', 'panel1:right:2:notifications@cinnamon.org:6', 'panel1:right:3:removable-drives@cinnamon.org:7', 'panel1:right:5:network@cinnamon.org:9', 'panel1:right:8:calendar@cinnamon.org:12', 'panel1:right:9:sound@cinnamon.org:13']"
+
 # make some directories needed by fstab #
-sudo mkdir /media/remotemachine
+sudo mkdir /media/Archive
 sudo mkdir /media/ntfs
-# create samba credential files #
-sudo touch /etc/samba/cred
-sudo sh -c "echo 'username=yourusername' >> /etc/samba/cred"
-sudo sh -c "echo 'password=yourpassword' >> /etc/samba/cred"
-sudo chmod 0600 /etc/samba/cred
-# add new hosts #
-sudo sh -c "echo '192.168.0.105 remotemachinename' >> /etc/hosts"
 # add drives to fstab #
-sudo sh -c "echo 'UUID=791957C576AE1E67 /media/ntfs ntfs umask=000,utf8 0 0' >> /etc/fstab"
-sudo sh -c "echo '//remoteIP/remote-dir /media/remotemachine cifs credentials=/etc/samba/cred,noperm,uid=1000,gid=1000 0 0' >> /etc/fstab"
-# fixing umountcifs problem in Ubuntu on restart and shutdown #
-sudo cp /home/yourusername/path/to/the/script/umountcifs /etc/init.d/
-sudo update-rc.d umountcifs stop 02 0 6
-sudo ln -s /etc/init.d/umountcifs /etc/rc0.d/K01umountcifs
-sudo ln -s /etc/init.d/umountcifs /etc/rc6.d/K01umountcifs
-# copy OpenVPN certificates to /etc/openvpn #
-sudo cp /home/yourusername/.install/vpn/* /etc/openvpn
-sudo /etc/init.d/openvpn restart
-# time needed to connect to the VPN server (30s with reserve) and mounting drives #
-sleep 30 && sudo mount -a
+#sudo sh -c "echo 'UUID=791957C576AE1E67 /media/ntfs ntfs umask=000,utf8 0 0' >> /etc/fstab"
+#sudo sh -c "echo '//remoteIP/remote-dir /media/remotemachine cifs credentials=/etc/samba/cred,noperm,uid=1000,gid=1000 0 0' >> /etc/fstab"
 # turn off pc speaker beeping #
-echo "blacklist pcspkr" | sudo tee -a /etc/modprobe.d/blacklist
+# echo "blacklist pcspkr" | sudo tee -a /etc/modprobe.d/blacklist
 # turn off welcome sound #
-sudo -u gdm gconftool-2 --set /desktop/gnome/sound/event_sounds --type bool false
-# enabling cpufreq-applet CPU frequency scaling #
-sudo chmod u+s /usr/bin/cpufreq-selector
+#sudo -u gdm gconftool-2 --set /desktop/gnome/sound/event_sounds --type bool false
