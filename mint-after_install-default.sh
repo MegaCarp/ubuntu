@@ -8,6 +8,8 @@ software-sources
 #2.Install Drivers
 #3.Install Microcode
 
+notify-send "Если на этом компьютере не критично потеря сохранения (проект, курсовая, видео), то выбрать рабочие харды, CTRL+E, у каждого в третьей вкладке включить тумблер"
+gnome-disks
 # update & upgrade #
 sudo apt-get update
 sudo apt-get dist-upgrade
@@ -95,3 +97,10 @@ sudo xed /etc/fstab
 # echo "blacklist pcspkr" | sudo tee -a /etc/modprobe.d/blacklist
 # turn off welcome sound #
 #sudo -u gdm gconftool-2 --set /desktop/gnome/sound/event_sounds --type bool false
+notify-send "Сервис -> Параметры -> Расширенные возможности -> Отключить Java (первая галочка)"
+notify-send "Сервис -> Параметры -> Память -> 64 for LibreOffice & 12 памяти на объект"
+libreoffice
+notify-send "Убрать лишнее из Автозагрузки: mintUpload, mintwelcome. Если карта не nVidia, то убрать Nvidia app"
+cinnamon-settings startup
+notify-send "В Firefox выставить желаемые поиск и домашнюю страницу"
+firefox
