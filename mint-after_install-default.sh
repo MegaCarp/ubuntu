@@ -48,17 +48,17 @@ sudo apt-get upgrade
 sudo apt-get remove virtualbox-guest* tomboy simple-scan gimp hexchat pidgin thunderbird transmission -y
 notify-send "Удалены: Сканер, Gimp, Hexchat, Pidgin, Thunderbird, Transmission"
 # INSTALL new apps #
-sudo apt-get install xpad qbittorrent anydesk telegram skypeforlinux intel-microcode ttf-mscorefonts-installer dconf-editor -y
+sudo apt-get install xpad qbittorrent anydesk telegram skypeforlinux intel-microcode ttf-mscorefonts-installer dconf-editor bsdtar -y
 notify-send "Установлены: Qbittorrent, Anydesk, Telegram, Skype, Intel Microcode, mscorefonts, dconf"
 
-# applets installation #
-cd ~/.local/share/cinnamon/applets/
-
-# 'panel1:right:0:sticky@scollins:15' #
-wget https://cinnamon-spices.linuxmint.com/files/applets/sticky@scollins.zip -O temp.zip; unzip temp.zip
+# applets installation # # 'panel1:right:0:sticky@scollins:15' #
+wget -qO- https://cinnamon-spices.linuxmint.com/files/applets/sticky@scollins.zip | sudo bsdtar -xvf- -C ~/.local/share/cinnamon/applets/
 
 rm temp.zip
 cd ~
+
+# icons # # win10 # 
+wget -qO- https://github.com/B00merang-Project/Windows-10-Icons/archive/master.zip | sudo bsdtar -xvf- -C /usr/share/icons
 
 # check thru 'cat /proc/sys/vm/swappiness' - ’60’=mucho swappiness # # # vfs -the tendency of the kernel to reclaim the memory 'sudo cat /proc/sys/vm/vfs_cache_pressure' to check#
 echo 'vm.swappiness=10
@@ -80,6 +80,15 @@ gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-battery-
 gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org:1', 'panel1:left:2:panel-launchers@cinnamon.org:3', 'panel1:left:3:window-list@cinnamon.org:4', 'panel1:right:0:systray@cinnamon.org:0', 'panel1:right:0:on-screen-keyboard@cinnamon.org:14', 'panel1:right:1:keyboard@cinnamon.org:5', 'panel1:right:2:notifications@cinnamon.org:6', 'panel1:right:3:removable-drives@cinnamon.org:7', 'panel1:right:5:network@cinnamon.org:9', 'panel1:right:8:calendar@cinnamon.org:12', 'panel1:right:9:sound@cinnamon.org:13']"
 # no terminal, no software store in favorites#
 gsettings set org.cinnamon favorite-apps "['firefox.desktop', 'cinnamon-settings.desktop', 'nemo.desktop']"
+
+# keybinding #
+gsettings set org.cinnamon.desktop.keybindings.media-keys logout "[]"
+gsettings set org.cinnamon.desktop.keybindings.media-keys shutdown "['XF86PowerOff']"
+notify-send "Чтобы Диспетчер задач открывался на Ctrl+Alt+Delete: Комбинации клавиш -> Доп. комбинации -> Добавить пользовательскую -> Название 'Диспетчер задач' ; Команда 'gnome-system-monitor' -> Привязка клавиш Ctrl+Alt+Delete"
+cinnamon-settings keyboard
+gsettings set org.cinnamon.desktop.keybindings.custom-keybindings.custom0 binding "['<Primary><Alt>Delete']"
+gsettings set org.cinnamon.desktop.keybindings.custom-keybindings.custom0 command "gnome-system-monitor"
+gsettings set org.cinnamon.desktop.keybindings.custom-keybindings.custom1 name "Диспетчер задач"
 
 notify-send "Настроены: swappiness, убраны hibernation/switch user, при закрытии крышки\нажатии кнопки комп уходит в сон, при работе от батареи сам не отключается никогда"  
 # make some directories needed by fstab #
