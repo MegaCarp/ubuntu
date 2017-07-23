@@ -1,6 +1,14 @@
 #!/bin/sh
+#https://www.youtube.com/watch?v=RXV6FXVL6xI
+
+#1.Configure Update Manager
+notify-send "Выстави локальные зеркала"
+software-sources
+
+#2.Install Drivers
+#3.Install Microcode
+
 # update & upgrade #
-#power options? suspend\hiber on lid closing and low power? #
 sudo apt-get update
 sudo apt-get dist-upgrade
 
@@ -39,31 +47,45 @@ sudo apt-get remove virtualbox-guest* tomboy simple-scan gimp hexchat pidgin thu
 # INSTALL new apps #
 sudo apt-get install xpad qbittorrent anydesk telegram skypeforlinux intel-microcode ttf-mscorefonts-installer dconf-editor -y
 
-#applets
+# applets installation #
 cd ~/.local/share/cinnamon/applets/
 
-#'panel1:right:0:sticky@scollins:15'
+# 'panel1:right:0:sticky@scollins:15' #
 wget https://cinnamon-spices.linuxmint.com/files/applets/sticky@scollins.zip -O temp.zip; unzip temp.zip
 
 rm temp.zip
 cd ~
 
-# dconf settings edit # # power options #
+#check thru 'cat /proc/sys/vm/swappiness' - ’60’=mucho swappiness
+sudo echo "vm.swappiness=10" >> /etc/sysctl.conf
+# remove hibernate from shutdown options #
+sudo mv -v /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla / 
+
+# dconf settings edit # # power options - suspend\hiber on lid closing and low power #
 gsettings set org.cinnamon.settings-daemon.plugins.power button-hibernate 'suspend'
 gsettings set org.cinnamon.settings-daemon.plugins.power button-power 'suspend'
 gsettings set org.cinnamon.settings-daemon.plugins.power critical-battery-action 'suspend'
 gsettings set org.cinnamon.settings-daemon.plugins.power lock-on-suspend 'false'
 gsettings set org.cinnamon.settings-daemon.plugins.power sleep-display-battery '300'
 gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-battery-timeout '300'
-
+# applets - no battery applet coz I don't know notebooks that can work w\o cord, no user applet #
 gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org:1', 'panel1:left:2:panel-launchers@cinnamon.org:3', 'panel1:left:3:window-list@cinnamon.org:4', 'panel1:right:0:systray@cinnamon.org:0', 'panel1:right:0:on-screen-keyboard@cinnamon.org:14', 'panel1:right:1:keyboard@cinnamon.org:5', 'panel1:right:2:notifications@cinnamon.org:6', 'panel1:right:3:removable-drives@cinnamon.org:7', 'panel1:right:5:network@cinnamon.org:9', 'panel1:right:8:calendar@cinnamon.org:12', 'panel1:right:9:sound@cinnamon.org:13']"
+# no terminal, no software store #
+gsettings set org.cinnamon favorite-apps "['firefox.desktop', 'cinnamon-settings.desktop', 'nemo.desktop']"
+# disable user switching #
+gsettings set org.cinnamon.desktop.lockdown disable-user-switching 'true'
 
 # make some directories needed by fstab #
 sudo mkdir /media/Archive
 sudo mkdir /media/ntfs
+# give Archive read\write permissions #
+sudo chmod ugo+wx /media/Archive
 # add drives to fstab #
 #sudo sh -c "echo 'UUID=791957C576AE1E67 /media/ntfs ntfs umask=000,utf8 0 0' >> /etc/fstab"
 #sudo sh -c "echo '//remoteIP/remote-dir /media/remotemachine cifs credentials=/etc/samba/cred,noperm,uid=1000,gid=1000 0 0' >> /etc/fstab"
+# enable trim on ssd #
+notify-send "ТОЛЬКО ДЛЯ SSD: на всех партициях на SSD кроме swap перед 'errors' добавь 'noatime,' (без кавычек, но с запятой, без пробела)"
+sudo xed /etc/fstab
 # turn off pc speaker beeping #
 # echo "blacklist pcspkr" | sudo tee -a /etc/modprobe.d/blacklist
 # turn off welcome sound #
