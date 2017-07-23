@@ -1,20 +1,4 @@
-#https://www.youtube.com/watch?v=RXV6FXVL6xI
 
-#1.Configure Update Manager
-#2.Install Drivers
-#3.Install Microcode
-#4.Decrease Swap Use
-#check thru cat /proc/sys/vm/swappiness - ’60’=mucho swappiness
-
-sudo echo "vm.swappiness=10" >> /etc/sysctl.conf
-sudo mv -v /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla / 
-
-#check https://anydesk.com/download for proper link, here's default Debian x64
-wget -O ~/.mydebs/anydesk.deb https://download.anydesk.com/linux/anydesk_2.9.3-1_amd64.deb && sudo update-mydebs && sudo apt-get update && sudo apt-get install anydesk
-
-#6.Reduce SSD Writes
-sudo nano /etc/fstab
-#for every partition on ssd except swap add 'noatime,' before 'errors'
 
 #5.Enable Drive Cache
 #Disks -> [your driver] -> Drive settings -> Write cache - On
