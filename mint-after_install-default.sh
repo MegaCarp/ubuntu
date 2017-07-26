@@ -54,9 +54,6 @@ notify-send "Установлены: Qbittorrent, Anydesk, Telegram, Skype, Inte
 # applets installation # # 'panel1:right:0:sticky@scollins:15' #
 wget -qO- https://cinnamon-spices.linuxmint.com/files/applets/sticky@scollins.zip | sudo bsdtar -xvf- -C ~/.local/share/cinnamon/applets/
 
-rm temp.zip
-cd ~
-
 # icons # # win10 # 
 wget -qO- https://github.com/B00merang-Project/Windows-10-Icons/archive/master.zip | sudo bsdtar -xvf- -C /usr/share/icons
 
