@@ -22,9 +22,9 @@ sudo apt-get dist-upgrade
 sudo apt-get install dpkg-dev
 mkdir ~/.mydebs/
 mkdir ~/bin/
-echo "#!/bin/bash
+echo '#!/bin/bash
  cd ~/.mydebs
- dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz'" > ~/bin/update-mydebs
+ dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz' > ~/bin/update-mydebs
 sudo chmod u+x ~/bin/update-mydebs
 echo deb [trusted=yes] file://$HOME/.mydebs ./ | sudo tee -a /etc/apt/sources.list
 
