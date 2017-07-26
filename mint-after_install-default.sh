@@ -10,6 +10,10 @@ software-sources
 
 notify-send "Если на этом компьютере не критично потеря сохранения (проект, курсовая, видео), то выбрать рабочие харды, CTRL+E, у каждого в третьей вкладке включить тумблер"
 gnome-disks
+
+#turn off locking on screensaver
+notify-send "Вторая закладка, снять оба тумблера"
+cinnamon-settings screensaver
 # update & upgrade #
 sudo apt-get update
 sudo apt-get dist-upgrade
