@@ -16,7 +16,7 @@ notify-send "Вторая закладка, снять оба тумблера"
 cinnamon-settings screensaver
 # update & upgrade #
 sudo apt-get update
-sudo apt-get dist-upgrade
+sudo apt-get dist-upgrade -y
 
 # setup personal repo #
 sudo apt-get install dpkg-dev
