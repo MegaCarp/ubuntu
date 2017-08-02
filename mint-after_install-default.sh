@@ -98,6 +98,7 @@ sudo mkdir /media/ntfs
 # give Archive read\write permissions #
 sudo chmod ugo+wx /media/Archive
 # add drives to fstab #
+echo 'UUID=97ed9666-8d56-41ad-8ceb-f1e98fe42c3e /media/Archive ext4 defaults 0  2' | sudo tee -a /etc/fstab
 #sudo sh -c "echo 'UUID=791957C576AE1E67 /media/ntfs ntfs umask=000,utf8 0 0' >> /etc/fstab"
 #sudo sh -c "echo '//remoteIP/remote-dir /media/remotemachine cifs credentials=/etc/samba/cred,noperm,uid=1000,gid=1000 0 0' >> /etc/fstab"
 # enable trim on ssd #
