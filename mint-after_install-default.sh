@@ -114,4 +114,4 @@ libreoffice
 notify-send "Убрать лишнее из Автозагрузки: mintUpload, mintwelcome. Если карта не nVidia, то убрать Nvidia app"
 cinnamon-settings startup
 notify-send "В Firefox выставить желаемые поиск и домашнюю страницу"
-firefox
+firefox about:preferences#search
