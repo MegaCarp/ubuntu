@@ -1,6 +1,7 @@
 #!/bin/sh
 #https://www.youtube.com/watch?v=RXV6FXVL6xI
 
+{
 #1.Configure Update Manager
 notify-send "Выстави локальные зеркала"
 software-sources
@@ -114,3 +115,4 @@ notify-send "Убрать лишнее из Автозагрузки: mintUpload
 cinnamon-settings startup
 notify-send "В Firefox выставить желаемые поиск и домашнюю страницу"
 firefox about:preferences#search
+} > output.txt 2> errores.txt
